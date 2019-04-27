@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4b0762eb-2fdf-4955-aeb7-d53748af6ce2" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/HelicopterController.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="153" column="5" lean-forward="true" selection-start-line="153" selection-start-column="5" selection-end-line="153" selection-end-column="5" />
+              <folding>
+                <marker date="1556154575682" expanded="false" signature="6:140" ph="..." />
+                <marker date="1556154575682" expanded="true" signature="191:9605" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="255:333" ph="/* General ... */" />
+                <marker date="1556154575682" expanded="true" signature="635:714" ph="/* Rotation ... */" />
+                <marker date="1556154575682" expanded="true" signature="991:1070" ph="/* Movement ... */" />
+                <marker date="1556154575682" expanded="true" signature="1615:1691" ph="/* Rotor ... */" />
+                <marker date="1556154575682" expanded="true" signature="1968:2045" ph="/* Camera ... */" />
+                <marker date="1556154575682" expanded="true" signature="2234:2317" ph="/* Ground Check ... */" />
+                <marker date="1556154575682" expanded="true" signature="2909:3222" ph="/* [SerializeField, ReadOnly] ... */" />
+                <marker date="1556154575682" expanded="true" signature="3750:3830" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="3873:4266" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="4334:5194" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="4406:4710" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="4723:5188" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="5225:5294" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="5360:6165" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="5432:5875" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="5798:5865" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="5888:5988" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="6227:7029" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="6348:6753" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="6766:6862" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="7097:7916" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="7128:7569" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="7492:7559" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="7582:7681" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="7954:8399" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="7986:8172" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="8098:8162" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="8203:8268" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="8443:8620" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="8667:8839" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="8875:9119" ph="{...}" />
+                <marker date="1556154575682" expanded="true" signature="8890:8974" ph="/* Check speed when grounded checked ... */" />
+                <marker date="1556154575682" expanded="false" signature="9125:9603" ph="OnDrawGizmosSelected" />
+                <marker date="1556154575682" expanded="true" signature="9212:9579" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/HelicopterController.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Assets/Scripts/HelicopterController.cs" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="-1928" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="UnityExplorer" proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="SolutionExplorer">
+        <option name="show-all-files" value="false" />
+      </pane>
+      <pane id="UnityExplorer">
+        <option name="show-hidden-items" value="false" />
+        <option name="show-project-names" value="true" />
+      </pane>
+      <pane id="AssemblyExplorer" />
+      <pane id="FileSystemExplorer" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
+    <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="AndroidSettingsPageId" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4b0762eb-2fdf-4955-aeb7-d53748af6ce2" name="Default Changelist" comment="" />
+      <created>1555887294528</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1555887294528</updated>
+      <workItem from="1555887297234" duration="6452000" />
+      <workItem from="1555981862537" duration="2017000" />
+      <workItem from="1556022922693" duration="319000" />
+      <workItem from="1556023255292" duration="1341000" />
+      <workItem from="1556043895543" duration="3283000" />
+      <workItem from="1556107681601" duration="1390000" />
+      <workItem from="1556154074651" duration="1905000" />
+      <workItem from="1556382241081" duration="394000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="17101000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-1928" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.110341154" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Capture Tool" order="3" />
+      <window_info id="Favorites" order="4" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="NuGet" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Unity" order="10" />
+      <window_info anchor="bottom" id="Database Changes" order="11" />
+      <window_info anchor="bottom" id="Unit Tests" order="12" />
+      <window_info anchor="bottom" id="Terminal" order="13" />
+      <window_info anchor="bottom" id="Event Log" order="14" side_tool="true" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="right" id="Errors In Solution" order="4" />
+      <window_info anchor="right" id="Database" order="5" />
+    </layout>
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" suspend="NONE" type="DotNet Exception Breakpoints">
+          <properties exception="System.Threading.ThreadAbortException" displayValue="System.Threading.ThreadAbortException" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/HelicopterController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="153" column="5" lean-forward="true" selection-start-line="153" selection-start-column="5" selection-end-line="153" selection-end-column="5" />
+          <folding>
+            <marker date="1556154575682" expanded="false" signature="6:140" ph="..." />
+            <marker date="1556154575682" expanded="true" signature="191:9605" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="255:333" ph="/* General ... */" />
+            <marker date="1556154575682" expanded="true" signature="635:714" ph="/* Rotation ... */" />
+            <marker date="1556154575682" expanded="true" signature="991:1070" ph="/* Movement ... */" />
+            <marker date="1556154575682" expanded="true" signature="1615:1691" ph="/* Rotor ... */" />
+            <marker date="1556154575682" expanded="true" signature="1968:2045" ph="/* Camera ... */" />
+            <marker date="1556154575682" expanded="true" signature="2234:2317" ph="/* Ground Check ... */" />
+            <marker date="1556154575682" expanded="true" signature="2909:3222" ph="/* [SerializeField, ReadOnly] ... */" />
+            <marker date="1556154575682" expanded="true" signature="3750:3830" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="3873:4266" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="4334:5194" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="4406:4710" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="4723:5188" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="5225:5294" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="5360:6165" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="5432:5875" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="5798:5865" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="5888:5988" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="6227:7029" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="6348:6753" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="6766:6862" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="7097:7916" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="7128:7569" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="7492:7559" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="7582:7681" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="7954:8399" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="7986:8172" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="8098:8162" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="8203:8268" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="8443:8620" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="8667:8839" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="8875:9119" ph="{...}" />
+            <marker date="1556154575682" expanded="true" signature="8890:8974" ph="/* Check speed when grounded checked ... */" />
+            <marker date="1556154575682" expanded="false" signature="9125:9603" ph="OnDrawGizmosSelected" />
+            <marker date="1556154575682" expanded="true" signature="9212:9579" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

@@ -261,6 +261,9 @@
               <e p="UnlitShadow.shader" t="Include" />
             </e>
           </e>
+          <e p="MobileCity" t="Include">
+            <e p="Readme.txt" t="Include" />
+          </e>
         </e>
       </e>
       <e p="Library" t="ExcludeRecursive" />

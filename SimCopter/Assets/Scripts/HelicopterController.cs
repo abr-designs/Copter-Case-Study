@@ -4,6 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.Serialization;
 
+[RequireComponent(typeof(Rigidbody))]
 public class HelicopterController : MonoBehaviour
 {
     [SerializeField] protected HelicopterControls test;
@@ -14,11 +15,17 @@ public class HelicopterController : MonoBehaviour
     [SerializeField, FoldoutGroup("General")]
     private float takeOffTime;
 
-    [SerializeField, FoldoutGroup("General"), Range(0f, 0.1f)]
+    [SerializeField, FoldoutGroup("General"), Range(0.001f, 0.1f)]
     private float decelerationPrecision;
 
     [SerializeField, FoldoutGroup("General"), Range(0.1f, 1f)]
     private float naturalDecelerationMultiplier;
+    
+    [SerializeField, FoldoutGroup("General"), Range(0f, 1f)]
+    private float crashReverseMultiplier;
+    
+    [FormerlySerializedAs("crashSpeedValue")] [SerializeField, FoldoutGroup("General"), Range(0f, 3f)]
+    private float crashSpeedThreshold;
 
     //Rotation
     //============================================================//
@@ -92,8 +99,10 @@ public class HelicopterController : MonoBehaviour
     [SerializeField, FoldoutGroup("Ground Check")]
     private Vector3 originOffset;
     //============================================================//
-[SerializeField, ReadOnly,]
+    [SerializeField, ReadOnly,BoxGroup("Debug"),]
     private Vector3 _accelerations = Vector3.zero;
+    [SerializeField, ReadOnly,BoxGroup("Debug"),]
+    private float speed;
 
     private float _takeOffTimer = 0f;
     private bool  _canTakeOff;
@@ -125,12 +134,21 @@ public class HelicopterController : MonoBehaviour
 
     //============================================================//
 
+    private Vector3 _CurrentPosition;
+    private Quaternion _CurrentRotation;
+
     private new Transform transform;
+
+    private new Rigidbody rigidbody;
 
     // Start is called before the first frame update
     void Start()
     {
         transform = gameObject.transform;
+        rigidbody = GetComponent<Rigidbody>();
+
+        _CurrentPosition = rigidbody.position;
+        _CurrentRotation = rigidbody.rotation;
 
         InitControls();
 
@@ -149,6 +167,12 @@ public class HelicopterController : MonoBehaviour
 
     }
 
+    private void FixedUpdate()
+    {
+        rigidbody.position = _CurrentPosition;
+        rigidbody.rotation = _CurrentRotation;
+    }
+
     // Update is called once per frame
     protected void Update()
     {
@@ -164,19 +188,28 @@ public class HelicopterController : MonoBehaviour
         }
         else
         {
+            if (isGrounded && speed < crashSpeedThreshold)
+            {
+                Debug.Log($"Landing Speed {speed}");
+                Land();
+                return;
+            }
             
-            Vector3    position = transform.position;
-            Quaternion rotation = transform.rotation;
 
-            ProcessRotation(ref rotation);
-            ProcessMovement(ref position);
-            ProcessClimb(ref position);
+            _CurrentPosition = rigidbody.position;
+            _CurrentRotation = rigidbody.rotation;
 
-            transform.rotation = rotation;
-            transform.position = position;
-            
+            ProcessRotation(ref _CurrentRotation);
+            ProcessMovement(ref _CurrentPosition);
+            ProcessClimb(ref _CurrentPosition);
+
+            //transform.rotation = _CurrentRotation;
+            //transform.position = _CurrentPosition;
+
             rotorTransform.localEulerAngles += Vector3.up * rotorRotationSpeed * Time.deltaTime;
         }
+
+        speed = _accelerations.sqrMagnitude;
     }
 
     private void LateUpdate()
@@ -185,6 +218,31 @@ public class HelicopterController : MonoBehaviour
         UpdateCamera();
     }
 
+    protected void Takeoff()
+    {
+        isGrounded = false;
+        ignoreGroundCheck = true;
+        _canTakeOff = true;
+        _takeOffTimer = takeOffTime - Time.deltaTime;
+        
+    }
+    protected void Land()
+    {
+        _canTakeOff = false;
+        _accelerations = Vector3.zero;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (speed < crashSpeedThreshold)
+            return;
+        
+        _accelerations *= -crashReverseMultiplier;
+        
+        
+        Debug.Log($"Collision with {other.gameObject.name}. Speed {speed}");
+
+    }
 
     protected void ProcessMovement(ref Vector3 currentPosition)
     {
@@ -275,7 +333,10 @@ public class HelicopterController : MonoBehaviour
             _takeOffTimer += Time.deltaTime;
         }
 
-        _canTakeOff = (_takeOffTimer >= takeOffTime);
+        if(_takeOffTimer >= takeOffTime)
+            Takeoff();
+        
+        //_canTakeOff = (_takeOffTimer >= takeOffTime);
         //_accelerations.z = Mathf.Clamp(_accelerations.z, -1f, 1f);
 
     }
@@ -289,13 +350,25 @@ public class HelicopterController : MonoBehaviour
     
     protected virtual void UpdateCamera()
     {
-        cameraTransform.position = transform.position + cameraOffsetPosition;
+        //cameraTransform.position = _CurrentPosition + (cameraOffsetPosition);
 
-        cameraTransform.forward = transform.position - cameraTransform.position;
+        //cameraTransform.LookAt(_CurrentPosition);
     }
 
+    private bool ignoreGroundCheck = false;
+    private float ignoreTimer = 0f;
     protected void CheckGrounded()
     {
+        if (ignoreGroundCheck && ignoreTimer < 0.1f)
+        {
+            ignoreTimer += Time.deltaTime;
+            return;
+        }
+        else
+        {
+            ignoreTimer = 0f;
+            ignoreGroundCheck = false;
+        }
         //Check speed when grounded checked
         //TODO Need to account for crashing here
 

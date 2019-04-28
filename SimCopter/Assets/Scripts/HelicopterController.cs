@@ -88,7 +88,8 @@ public class HelicopterController : MonoBehaviour
     //============================================================//
 
     [SerializeField, ReadOnly, FoldoutGroup("Ground Check")]
-    protected bool isGrounded = false;
+    public bool IsGrounded { get; protected set; }
+
 
     [SerializeField, FoldoutGroup("Ground Check")]
     private LayerMask groundLayerMask;
@@ -178,7 +179,7 @@ public class HelicopterController : MonoBehaviour
     {
         CheckGrounded();
 
-        if (isGrounded && !_canTakeOff)
+        if (IsGrounded && !_canTakeOff)
         {
             ProccessTakeoff();
 
@@ -188,7 +189,7 @@ public class HelicopterController : MonoBehaviour
         }
         else
         {
-            if (isGrounded && speed < crashSpeedThreshold)
+            if (IsGrounded && speed < crashSpeedThreshold)
             {
                 Debug.Log($"Landing Speed {speed}");
                 Land();
@@ -220,7 +221,7 @@ public class HelicopterController : MonoBehaviour
 
     protected void Takeoff()
     {
-        isGrounded = false;
+        IsGrounded = false;
         ignoreGroundCheck = true;
         _canTakeOff = true;
         _takeOffTimer = takeOffTime - Time.deltaTime;
@@ -372,7 +373,7 @@ public class HelicopterController : MonoBehaviour
         //Check speed when grounded checked
         //TODO Need to account for crashing here
 
-        isGrounded = Physics.Raycast(transform.position + originOffset, -transform.up, checkDistance,
+        IsGrounded = Physics.Raycast(transform.position + originOffset, -transform.up, checkDistance,
             groundLayerMask.value);
     }
 
@@ -387,7 +388,7 @@ public class HelicopterController : MonoBehaviour
 
         Gizmos.DrawWireSphere(transform.position + cameraOffsetPosition, 0.2f);
 
-        Gizmos.color = isGrounded ? Color.green : Color.red;
+        Gizmos.color = IsGrounded ? Color.green : Color.red;
         Gizmos.DrawLine(transform.position + originOffset,
             transform.position + (-transform.up * checkDistance) + originOffset);
 

@@ -253,7 +253,10 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
+          <e p="GameController.cs" t="Include" />
+          <e p="Helicopter.cs" t="Include" />
           <e p="HelicopterController.cs" t="Include" />
+          <e p="Passenger.cs" t="Include" />
         </e>
         <e p="Standard Assets" t="Include">
           <e p="Low Poly Helicopters Pack Free" t="Include">

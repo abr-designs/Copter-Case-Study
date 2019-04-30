@@ -7,6 +7,12 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(Rigidbody))]
 public class HelicopterController : MonoBehaviour
 {
+
+    public bool IsLanded
+    {
+        get { return (IsGrounded && !_canTakeOff); }
+    }
+    
     [SerializeField] protected HelicopterControls test;
 
     //General
@@ -138,16 +144,29 @@ public class HelicopterController : MonoBehaviour
     private Vector3 _CurrentPosition;
     private Quaternion _CurrentRotation;
 
-    private new Transform transform;
+    public new Transform transform
+    {
+        get
+        {
+            if (_transform == null)
+                _transform = GetComponent<Transform>();
+
+            return _transform;
+        }
+    }
+
+    private Transform _transform;
 
     private new Rigidbody rigidbody;
+
+    private void Awake()
+    {
+        rigidbody = GetComponent<Rigidbody>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        transform = gameObject.transform;
-        rigidbody = GetComponent<Rigidbody>();
-
         _CurrentPosition = rigidbody.position;
         _CurrentRotation = rigidbody.rotation;
 
@@ -383,8 +402,6 @@ public class HelicopterController : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (!transform)
-            transform = gameObject.transform;
 
         Gizmos.DrawWireSphere(transform.position + cameraOffsetPosition, 0.2f);
 

@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Passenger : MonoBehaviour
 {
+    public string Name;
+    public bool waitingToBoard = true;
     [SerializeField] private float pickupRadius    = 10;
     [SerializeField] private float pickupThreshold = 1;
 
     [SerializeField] private float moveSpeed = 5;
+
+    private Transform _helicopterTransform;
 
     private new Transform transform;
 
@@ -15,17 +19,25 @@ public class Passenger : MonoBehaviour
     void Start()
     {
         transform = gameObject.transform;
+        _helicopterTransform = GameController.Instance.Helicopter.HelicopterController.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        var helicopterPosition = GameController.Instance.Helicopter.HelicopterController.transform.position;
+        //TODO Want to walk away from helicopter if this is the case
+        if (!waitingToBoard)
+            return;
+        
+        if (_helicopterTransform == null)
+            return;
+        
+        var helicopterPosition = _helicopterTransform.position;
         var Distance           = Vector3.Distance(transform.position, helicopterPosition);
         if (Distance > pickupRadius)
             return;
 
-        if (!GameController.Instance.Helicopter.HelicopterController.IsGrounded)
+        if (!GameController.Instance.Helicopter.HelicopterController.IsLanded)
             return;
 
         if (Distance > pickupThreshold)
@@ -36,7 +48,12 @@ public class Passenger : MonoBehaviour
 
         }
         else
-            GameController.Instance.Helicopter.Embark(gameObject);
+            GameController.Instance.Helicopter.Embark(this);
+    }
+
+    public void SetActive(bool state)
+    {
+        gameObject.SetActive(state);
     }
 
     private void OnDrawGizmosSelected()

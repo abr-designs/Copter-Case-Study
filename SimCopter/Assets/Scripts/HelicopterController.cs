@@ -7,12 +7,22 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(Rigidbody))]
 public class HelicopterController : MonoBehaviour
 {
-
-    public bool IsLanded
+    [System.Serializable]
+    class ValueDelta
     {
-        get { return (IsGrounded && !_canTakeOff); }
+        public float speed;
+
+        public float acceleration;
+        
+        [Range(0.001f, 0.1f)]
+        public float decelerationPrecision;
+
+        [Range(0.1f, 1f)]
+        public float naturalDecelerationMultiplier;
+        
     }
-    
+    public bool IsLanded => (IsGrounded && !_canTakeOff);
+
     [SerializeField] protected HelicopterControls test;
 
     //General
@@ -21,16 +31,18 @@ public class HelicopterController : MonoBehaviour
     [SerializeField, FoldoutGroup("General")]
     private float takeOffTime;
 
-    [SerializeField, FoldoutGroup("General"), Range(0.001f, 0.1f)]
-    private float decelerationPrecision;
-
-    [SerializeField, FoldoutGroup("General"), Range(0.1f, 1f)]
-    private float naturalDecelerationMultiplier;
+    //[SerializeField, FoldoutGroup("General"), Range(0.001f, 0.1f)]
+    //private float decelerationPrecision;
+//
+    //[SerializeField, FoldoutGroup("General"), Range(0.1f, 1f)]
+    //private float naturalDecelerationMultiplier;
     
-    [SerializeField, FoldoutGroup("General"), Range(0f, 1f)]
+    //Crash
+    //============================================================//
+    [SerializeField, FoldoutGroup("Crash"), Range(0f, 1f)]
     private float crashReverseMultiplier;
     
-    [FormerlySerializedAs("crashSpeedValue")] [SerializeField, FoldoutGroup("General"), Range(0f, 3f)]
+    [SerializeField, FoldoutGroup("Crash"), Range(0f, 3f)]
     private float crashSpeedThreshold;
 
     //Rotation
@@ -49,23 +61,31 @@ public class HelicopterController : MonoBehaviour
     //Movement
     //============================================================//
 
-    [FormerlySerializedAs("riseSpeed")] [SerializeField, FoldoutGroup("Movement")]
-    private float climbSpeed;
+   //[FormerlySerializedAs("riseSpeed")] [SerializeField, FoldoutGroup("Movement")]
+   //private float climbSpeed;
 
+   //[SerializeField, FoldoutGroup("Movement")]
+   //private float riseAcceleration;
     [SerializeField, FoldoutGroup("Movement")]
-    private float riseAcceleration;
+    private ValueDelta climbing;
+    
+    [SerializeField, FoldoutGroup("Movement")]
+    private ValueDelta translation;
+    
+    [SerializeField, FoldoutGroup("Movement")]
+    private ValueDelta rotation;
 
-    [SerializeField, FoldoutGroup("Movement")]
-    private float translateSpeed;
+   //[SerializeField, FoldoutGroup("Movement")]
+   //private float translateSpeed;
 
-    [SerializeField, FoldoutGroup("Movement")]
-    private float translateAcceleration;
+   //[SerializeField, FoldoutGroup("Movement")]
+   //private float translateAcceleration;
 
-    [SerializeField, FoldoutGroup("Movement")]
-    private float rotationSpeed;
+   //[SerializeField, FoldoutGroup("Movement")]
+   //private float rotationSpeed;
 
-    [SerializeField, FoldoutGroup("Movement")]
-    private float rotationAcceleration;
+   //[SerializeField, FoldoutGroup("Movement")]
+   //private float rotationAcceleration;
 
 
     //Rotor
@@ -270,10 +290,10 @@ public class HelicopterController : MonoBehaviour
 
         if (mMove == 0f)
         {
-            if (_accelerations.x > decelerationPrecision)
-                _accelerations.x += translateAcceleration * -naturalDecelerationMultiplier * Time.deltaTime;
-            else if (_accelerations.x < -decelerationPrecision)
-                _accelerations.x += translateAcceleration * naturalDecelerationMultiplier * Time.deltaTime;
+            if (_accelerations.x > translation.decelerationPrecision)
+                _accelerations.x += translation.acceleration * -translation.naturalDecelerationMultiplier * Time.deltaTime;
+            else if (_accelerations.x < -translation.decelerationPrecision)
+                _accelerations.x += translation.acceleration * translation.naturalDecelerationMultiplier * Time.deltaTime;
             else
             {
                 _accelerations.x = 0f;
@@ -281,12 +301,12 @@ public class HelicopterController : MonoBehaviour
         }
         else
         {
-            _accelerations.x += translateAcceleration * mMove * Time.deltaTime;
+            _accelerations.x += translation.acceleration * mMove * Time.deltaTime;
         }
 
         _accelerations.x = Mathf.Clamp(_accelerations.x, -1f, 1f);
 
-        currentPosition += (transform.forward * translateSpeed * _accelerations.x) * Time.deltaTime;
+        currentPosition += (transform.forward * translation.speed * _accelerations.x) * Time.deltaTime;
 
     }
 
@@ -295,31 +315,31 @@ public class HelicopterController : MonoBehaviour
         //TODO I need to add some sort of natural sink to the movement of the helicopter
         if (mClimb == 0f)
         {
-            if (_accelerations.y > decelerationPrecision)
-                _accelerations.y += riseAcceleration * -naturalDecelerationMultiplier * Time.deltaTime;
-            else if (_accelerations.y < -decelerationPrecision)
-                _accelerations.y += riseAcceleration * naturalDecelerationMultiplier * Time.deltaTime;
+            if (_accelerations.y > climbing.decelerationPrecision)
+                _accelerations.y += climbing.acceleration * -climbing.naturalDecelerationMultiplier * Time.deltaTime;
+            else if (_accelerations.y < -climbing.decelerationPrecision)
+                _accelerations.y += climbing.acceleration * climbing.naturalDecelerationMultiplier * Time.deltaTime;
             else
                 _accelerations.y = 0f;
         }
         else
         {
-            _accelerations.y += riseAcceleration * mClimb * Time.deltaTime;
+            _accelerations.y += climbing.acceleration * mClimb * Time.deltaTime;
         }
 
         _accelerations.y = Mathf.Clamp(_accelerations.y, -1f, 1f);
 
-        currentPosition += (transform.up * climbSpeed * _accelerations.y) * Time.deltaTime;
+        currentPosition += (transform.up * climbing.speed * _accelerations.y) * Time.deltaTime;
     }
 
     protected void ProcessRotation(ref Quaternion currentRotation)
     {
         if (mTurn == 0f)
         {
-            if (_accelerations.z > decelerationPrecision)
-                _accelerations.z += rotationAcceleration * -naturalDecelerationMultiplier * Time.deltaTime;
-            else if (_accelerations.z < -decelerationPrecision)
-                _accelerations.z += rotationAcceleration * naturalDecelerationMultiplier * Time.deltaTime;
+            if (_accelerations.z > this.rotation.decelerationPrecision)
+                _accelerations.z += this.rotation.acceleration * -this.rotation.naturalDecelerationMultiplier * Time.deltaTime;
+            else if (_accelerations.z < -this.rotation.decelerationPrecision)
+                _accelerations.z += this.rotation.acceleration * this.rotation.naturalDecelerationMultiplier * Time.deltaTime;
             else
             {
                 _accelerations.z = 0f;
@@ -327,12 +347,12 @@ public class HelicopterController : MonoBehaviour
         }
         else
         {
-            _accelerations.z += rotationAcceleration * mTurn * Time.deltaTime;
+            _accelerations.z += this.rotation.acceleration * mTurn * Time.deltaTime;
         }
 
         _accelerations.z = Mathf.Clamp(_accelerations.z, -1f, 1f);
 
-        var rotation = Vector3.up * rotationSpeed * _accelerations.z * Time.deltaTime;
+        var rotation = Vector3.up * this.rotation.speed * _accelerations.z * Time.deltaTime;
 
         currentRotation = Quaternion.Euler(rotation) * currentRotation;
     }

@@ -6,6 +6,8 @@ public class GameController : MonoBehaviour
 {
     public static GameController Instance;
 
+    protected PassengerArea[] _passengerAreas;
+
     public Helicopter Helicopter
     {
         get
@@ -22,14 +24,23 @@ public class GameController : MonoBehaviour
     void Awake()
     {
         Instance = this;
-
-
+        _passengerAreas = FindObjectsOfType<PassengerArea>();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void DesignateDropoffZone(PassengerArea pickupLocation)
     {
+      while (true)
+      {
+          var area = _passengerAreas[Random.Range(0, _passengerAreas.Length)];
 
+          if (area == pickupLocation)
+              continue;
+
+          area.SetCurrentAreaState(PassengerArea.AreaState.DROPOFF);
+          break;
+
+      }
     }
+
 
 }

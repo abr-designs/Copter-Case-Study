@@ -3,15 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 //TODO This will incorporate both Spawning passengers for Pickup & Being Designated Drop-off
 [RequireComponent(typeof(Collider))]
 public class PassengerArea : MonoBehaviour
 {
-    public enum AreaType
+    public enum AreaState
     {
-        NONE,
+        NONE = -1,
         PICKUP = 0,
         DROPOFF
     }
@@ -19,18 +20,26 @@ public class PassengerArea : MonoBehaviour
     //=====================================================================================================//
     
     [SerializeField, ReadOnly]
-    protected bool _inArea;
+    protected bool _helicopterInArea;
     
     [SerializeField]
     protected string LookingForTag;
 
-    public AreaType CurrentAreaType;
+    public AreaState currentAreaState;
     
     
     protected static Transform _helicopterTransform;
 
     [SerializeField]
     protected GameObject[] PassengerPrefabs;
+
+    [SerializeField]
+    protected GameObject PickupPrefab;
+    [SerializeField]
+    protected GameObject DropoffPrefab;
+
+    protected GameObject passengerGameObject;
+    protected GameObject smokeGameObject;
     
     //=====================================================================================================//
 
@@ -48,21 +57,21 @@ public class PassengerArea : MonoBehaviour
         if(collider.isTrigger == false)
             throw new ArgumentException("Need to set the Collider trigger to true");
         
-        SetCurrentAreaState(CurrentAreaType);
+        SetCurrentAreaState(currentAreaState);
     }
 
     // Update is called once per frame
     protected void LateUpdate()
     {
-        if (_inArea == false)
+        if (_helicopterInArea == false)
             return;
 
-        switch (CurrentAreaType)
+        switch (currentAreaState)
         {
-            case AreaType.PICKUP:
+            case AreaState.PICKUP:
                 PickupAreaState();
                 break;
-            case AreaType.DROPOFF:
+            case AreaState.DROPOFF:
                 DropoffAreaState();
                 break;
         }
@@ -76,7 +85,7 @@ public class PassengerArea : MonoBehaviour
         if (!other.CompareTag(LookingForTag))
             return;
 
-        _inArea = true;
+        _helicopterInArea = true;
     }
     
     protected void OnTriggerExit(Collider other)
@@ -84,31 +93,51 @@ public class PassengerArea : MonoBehaviour
         if (!other.CompareTag(LookingForTag))
             return;
 
-        _inArea = false;
+        _helicopterInArea = false;
     }
     
     //=====================================================================================================//
+    
+    
+    
+    //=====================================================================================================//
 
-    protected void SetCurrentAreaState(AreaType type)
+
+    public void SetCurrentAreaState(AreaState state)
     {
-        CurrentAreaType = type;
+        currentAreaState = state;
         
-        switch (CurrentAreaType)
+        switch (currentAreaState)
         {
-            case AreaType.PICKUP:
+            case AreaState.NONE:
+                Destroy(smokeGameObject);
+                smokeGameObject = null;
+                break;
+            case AreaState.PICKUP:
 
+                smokeGameObject = Instantiate(PickupPrefab, transform.position, Quaternion.identity).gameObject;
+                smokeGameObject.transform.localScale = Vector3.one * 10f;
                 var instance = Instantiate(PassengerPrefabs[Random.Range(0, PassengerPrefabs.Length)]).GetComponent<Passenger>();
                 instance.waitingToBoard = true;
                 instance.transform.position = transform.position;
+                passengerGameObject = instance.gameObject;
                 
                 break;
-            case AreaType.DROPOFF:
+            case AreaState.DROPOFF:
+                smokeGameObject = Instantiate(DropoffPrefab, transform.position, Quaternion.identity).gameObject;
                 break;
         }
     }
-    
-    protected  virtual void PickupAreaState()
-    {}
+
+    protected virtual void PickupAreaState()
+    {
+        if(passengerGameObject.activeInHierarchy)
+            return;
+
+        passengerGameObject = null;
+        SetCurrentAreaState(AreaState.NONE);
+        GameController.Instance.DesignateDropoffZone(pickupLocation: this);
+    }
 
     protected virtual void DropoffAreaState()
     {
@@ -119,6 +148,9 @@ public class PassengerArea : MonoBehaviour
             return;
 
         GameController.Instance.Helicopter.TestPopTopPassenger();
+        SetCurrentAreaState(AreaState.NONE);
     }
+
+    //=====================================================================================================//
 
 }

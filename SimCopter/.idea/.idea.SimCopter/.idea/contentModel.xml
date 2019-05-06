@@ -12,6 +12,25 @@
           <e p="HelicopterControls.cs" t="Include" />
           <e p="Input.cs" t="Include" />
         </e>
+        <e p="Epic Toon FX" t="Include">
+          <e p="ETFX Readme.txt" t="Include" />
+          <e p="Prefabs" t="Include">
+            <e p="Combat" t="Include">
+              <e p="Combat FX.txt" t="Include" />
+            </e>
+            <e p="Environment" t="Include">
+              <e p="Environment FX.txt" t="Include" />
+            </e>
+            <e p="Interactive" t="Include">
+              <e p="Interactive FX.txt" t="Include" />
+            </e>
+          </e>
+          <e p="Scripts" t="Include">
+            <e p="ETFXLightFade.cs" t="Include" />
+            <e p="ETFXPitchRandomizer.cs" t="Include" />
+            <e p="ETFXRotation.cs" t="Include" />
+          </e>
+        </e>
         <e p="Plugins" t="Include">
           <e p="RainbowAssets" t="Include">
             <e p="!Core" t="Include">
